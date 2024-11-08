@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "Hitman Promotions Scraper (3005)",
+            "script": "npm run start:dev",
+            "instances": "1",
+            "autorestart": true,
+            "max_restarts": 100,
+            "time": true
+        }
+    ]
+}
