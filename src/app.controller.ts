@@ -17,32 +17,31 @@ export class AppController {
 
   @Get('events')
   async runQuery() {
-    const eventsslugs = ['north-american-dart-players', 'the-2024-pdc-us-darts-masters', 'classic-event'];
+    const slugs = ['north-american-dart-players', 'the-2024-pdc-us-darts-masters', 'classic-event'];
 
     const existingEvents = await this.eventModel.findAll({
       where: {
         slug: {
-          [Op.in]: eventsslugs,
+          [Op.in]: slugs,
         },
       },
     });
 
     const existingSlugs = existingEvents.map(event => event.slug);
-
-    const missingIndexes = eventsslugs
+    const missingIndexes = slugs
                             .map((slug, index) => (!existingSlugs.includes(slug) ? index : null))
                             .filter(index => index !== null);
-
     const missingEvents = missingIndexes.map(index => {
-      return {
-        event_name: '',
-        slug: '',
-        description: '',
-        status: 1,
-      }
+        return {
+          event_name: 'headings[index]',
+          slug: 'slugs[index]',
+          description: 'descriptions[index]',
+        //   image_url: images[index],
+          status: 1,
+        }
     });
-
-    // await this.eventModel.bulkCreate(missingEvents);
+  
+    await this.eventModel.bulkCreate(missingEvents);
 
     return missingEvents;
   }
