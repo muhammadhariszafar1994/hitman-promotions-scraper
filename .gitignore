@@ -1,7 +1,6 @@
-# compiled output
+# Dependencies
 /dist
 /node_modules
-.env
 
 # Logs
 logs
@@ -12,10 +11,17 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
+# OS generated files
 .DS_Store
 
-# Tests
+# Coverage
+/coverage
+/.nyc_output
+
+# Environment files
+.env
+
+# Test outputs
 /coverage
 /.nyc_output
 
@@ -28,7 +34,7 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# VSCode settings
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
