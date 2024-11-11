@@ -109,7 +109,7 @@ export class TaskService {
               event_name: headings[index],
               slug: slugs[index],
               description: descriptions[index],
-            //   image_url: images[index],
+              image_url: images[index],
               status: 1,
             }
         });
