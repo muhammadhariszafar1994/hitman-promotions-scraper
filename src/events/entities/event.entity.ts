@@ -32,13 +32,6 @@ export class Event extends Model<Event> {
   })
   description: string | null;
 
-  // @Column({
-  //   type: DataType.TEXT,
-  //   allowNull: true,
-  //   defaultValue: null,
-  // })
-  // image_url: string | null;
-
   @Column({
     type: DataType.DATEONLY,
     allowNull: true,
@@ -87,4 +80,18 @@ export class Event extends Model<Event> {
     defaultValue: null,
   })
   updated_at: Date | null;
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: true,
+    defaultValue: null,
+  })
+  image_url: string | null;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  })
+  image_status: number;
 }

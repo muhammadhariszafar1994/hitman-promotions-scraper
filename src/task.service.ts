@@ -74,7 +74,7 @@ export class TaskService {
                         contentArray[index] = contentArray[index] || [];
 
                         elements.forEach((ele) => {
-                            contentArray[index].push(ele.innerHTML);
+                        contentArray[index] += ele.innerHTML;
                         });
                     }
                 }
@@ -95,25 +95,24 @@ export class TaskService {
         // check and insert events
         const existingEvents = await this.eventModel.findAll({
             where: {
-              slug: {
+            slug: {
                 [Op.in]: slugs,
-              },
+            },
             },
         });
         const existingSlugs = existingEvents.map(event => event.slug);
         const missingIndexes = slugs
                                 .map((slug, index) => (!existingSlugs.includes(slug) ? index : null))
                                 .filter(index => index !== null);
-        const missingEvents = missingIndexes.map(index => {
-            return {
-              event_name: headings[index],
-              slug: slugs[index],
-              description: descriptions[index],
-              image_url: images[index],
-              status: 1,
-            }
-        });
-      
+        const missingEvents = missingIndexes.map(index => ({
+                                    event_name: headings[index],
+                                    slug: slugs[index],
+                                    description: descriptions[index],
+                                    image_url: images[index],
+                                    status: 1,
+                                    image_status: 1
+                                }));
+    
         await this.eventModel.bulkCreate(missingEvents);
 
         await browser.close();
